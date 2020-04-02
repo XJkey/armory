@@ -1,12 +1,13 @@
 import React from 'react';
-
+import './style/index.scss'
+import Button, { ButtonType, ButtonSize } from './components/Button/button'
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>hello</h1>
-        <h2>hello</h2>
-
+        <Button disabled>hello</Button>
+        <Button btnType={ButtonType.Primay} size={ButtonSize.large}>hello</Button>
+        <Button btnType={ButtonType.Link} disabled href="www.dsd.com">hello1</Button>
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
