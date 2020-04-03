@@ -30,7 +30,7 @@ export type ButtonProps = Partial<NativeButtonProps & AuchorButtonProps>;
 const Button: React.FC<ButtonProps> = (props) => {
     const { disabled, size, btnType, children, className, href, ...restProps } = props;
     const classes = classNames('btn', className, {
-        [`btn-${btnType}`]: ButtonType,
+        [`btn-${btnType}`]: btnType,
         [`btn-${size}`]: size,
         'disabled': (btnType === ButtonType.Link) && disabled
     })

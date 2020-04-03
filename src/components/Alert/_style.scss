@@ -1,0 +1,51 @@
+.alert {
+    background-color: $blue;
+    color           : $white;
+    border-radius   : $alert-radius;
+    padding         : $alert-padding-y $alert-padding-x;
+    display         : inline-block;
+    position        : relative;
+    width           : $alert-width;
+    display         : flex;
+
+    .main {
+        flex: 1;
+
+        .title {
+            font-weight: $font-weight-bold;
+            font-size  : $font-size-base;
+            flex       : 1;
+        }
+
+        .isolation {
+            height: 0.3rem;
+        }
+
+        .content {
+            line-height: $line-height-base;
+            font-size  : $font-size-sm;
+
+        }
+    }
+
+    .side {
+        i {
+            display    : inline-block;
+            cursor     : pointer;
+            font-weight: $font-weight-bold;
+            font-size  : 26px;
+            line-height: 18px;
+        }
+    }
+}
+
+
+
+
+.alert-danger {
+    @include alert-style($danger, $white)
+}
+
+.alert-default {
+    @include alert-style($primary, $white)
+}

@@ -176,6 +176,11 @@ $pre-color     : null !default;
 // options 可配置选项
 $enable-pointer-cursor-for-buttons: true !default;
 
+//alert
+$alert-radius    :0.3rem !default;
+$alert-width     :420px !default;
+$alert-padding-y : 0.75rem !default;
+$alert-padding-x : 1.25rem !default;
 // 边框 和 border radius
 
 $border-width: 1px !default;

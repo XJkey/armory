@@ -1,6 +1,7 @@
 import React from 'react';
 import './style/index.scss'
-import Button, { ButtonType, ButtonSize } from './components/Button/button'
+import Button, { ButtonType, ButtonSize } from './components/Button/button';
+import Alert,{AlertStyleType} from './components/Alert/alert'
 function App() {
   return (
     <div className="App">
@@ -11,10 +12,14 @@ function App() {
         <Button btnType={ButtonType.Danger} size={ButtonSize.Small}>hello</Button>
         <Button btnType={ButtonType.Link} disabled href="www.dsd.com">hello1</Button>
         <Button btnType={ButtonType.Link} target='_blank' href="www.dsd.com">hello1</Button>
-
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
+        <Alert description='12343' cloable={true} onClose={()=>{alert(123)}}></Alert>
+
+        <Alert style={{margin:'20px 0'}} description='12343' cloable={false} onClose={()=>{alert(123)}}></Alert>    
+        <Alert style={{margin:'20px 0'}} title='提示标题欧亲' description='this is a long description'  onClose={()=>{alert(123)}}></Alert>   
+        <Alert style={{margin:'20px 0'}} type={AlertStyleType.Danger} title='你好\(^o^)/~'  cloable={false} onClose={()=>{alert(123)}}></Alert>           
         <a
           className="App-link"
           href="https://reactjs.org"
