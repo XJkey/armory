@@ -1,7 +1,9 @@
 import React, { useState, createContext } from "react";
 import ClassNames from "classnames";
 import { tabsItemProps } from "./tabsItem";
-import { deflate } from "zlib";
+import TabsMenu from "./tabsMenu";
+
+
 type SelectCallback = (selectedIndex: number) => void;
 export interface tabsProps {
     defalutIndex?: number;
@@ -42,8 +44,7 @@ const Tabs: React.FC<tabsProps> = (props) => {
             const childElement = child as React.FunctionComponentElement<tabsItemProps>;
             const { displayName } = childElement.type;
             if (displayName === 'TabsItem') {
-                const tabsItemClasses = ClassNames('tabs-item', { 'is-active': passedContext.index === index, 'is-disabled': childElement.props.disabled });
-                return React.cloneElement(<li className={tabsItemClasses} onClick={() => { handleClik(index) }}></li>, { index }, childElement.props.title)
+                return React.cloneElement(<TabsMenu index={index} disabled={childElement.props.disabled}>{childElement.props.title}</TabsMenu>)
             } else {
                 console.log('waring:Tab的子元素必须是TabItem')
             }
@@ -63,8 +64,10 @@ const Tabs: React.FC<tabsProps> = (props) => {
     }
     return (
         <div className={tabsClasses}>
-            <ul style={style}>
-                {TabChildren()}
+            <ul style={style} className='tabs-menu'>
+                <TabsContext.Provider value={passedContext}>
+                    {TabChildren()}
+                </TabsContext.Provider>
             </ul>
             <div>
                 <TabsContext.Provider value={passedContext}>

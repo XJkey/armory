@@ -1,5 +1,5 @@
 .tabs {
-    >ul {
+    >.tabs-menu {
         display      : flex;
         flex-wrap    : wrap;
         padding-left : 0;
@@ -20,8 +20,13 @@
 
             &.is-disabled {
                 color         : $menu-item-disabled-color;
+                cursor        : not-allowed;
                 pointer-events: none;
-                cursor        : default;
+
+                &:hover {
+                    color        : $menu-item-disabled-color;
+                    border-bottom: none;
+                }
             }
 
             &.is-active,
@@ -32,13 +37,13 @@
         }
     }
 
-    
+
     .tabsContent {
         display     : none;
         list-style  : none;
         padding-left: 0;
         white-space : nowrap;
-        transition: $menu-transition;
+        transition  : $menu-transition;
     }
 
     .tabsContent.tabs-opened {
