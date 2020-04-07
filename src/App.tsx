@@ -5,7 +5,8 @@ import Alert, { AlertStyleType } from './components/Alert/alert'
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem'
 import SubMenu from './components/Menu/subMenu'
-
+import Tabs from './components/Tabs/tabs'
+import TabsItem from './components/Tabs/tabsItem'
 
 function App() {
   return (
@@ -48,6 +49,13 @@ function App() {
           </SubMenu>
           <MenuItem>3</MenuItem>
         </Menu>
+
+
+        <Tabs  onSelect={(index) => alert(index)}>
+          <TabsItem  index={0} title="dff">4543535</TabsItem>
+          <TabsItem disabled index={1} title="d5f">4ggggg5</TabsItem>
+          <TabsItem  index={1} title="d5f">4ggggg5</TabsItem>
+        </Tabs>
       </header>
     </div>
   );

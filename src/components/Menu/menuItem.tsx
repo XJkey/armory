@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import ClassNames from "classnames";
 import { MenuContext } from './menu'
 
@@ -12,7 +12,7 @@ export interface MenuItemProps {
 const MenuItem: React.FC<MenuItemProps> = (props) => {
     const { index, disabled, className, style, children } = props;
     const context = useContext(MenuContext);
-    const calsses = ClassNames('menu-item', className, {
+    const classes = ClassNames('menu-item', className, {
         'is-disabled': disabled,
         'is-active': context.index === index
     })
@@ -23,7 +23,7 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
         }
     }
     return (
-        <li className={calsses} style={style} onClick={handleClick}>
+        <li className={classes} style={style} onClick={handleClick}>
             {children}
         </li>
     )
