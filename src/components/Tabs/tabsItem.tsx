@@ -16,7 +16,6 @@ const TabsItem: React.FC<tabsItemProps> = (props) => {
     const classes = ClassNames('tabsContent', className, {
         'tabs-opened': context.index === index
     })
-    
     return (
         <div style={style} className={classes}>{children}</div>
     )
