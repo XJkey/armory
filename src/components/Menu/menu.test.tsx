@@ -5,13 +5,13 @@ import MenuItem from "./menuItem";
 
 
 const testProps: MenuProps = {
-    defalutIndex: 0,
+    defalutIndex: '0',
     onSelect: jest.fn(),
     className: 'test'
 }
 
 const testVerProps: MenuProps = {
-    defalutIndex: 0,
+    defalutIndex: '0',
     mode: 'vertical'
 }
 

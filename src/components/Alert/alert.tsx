@@ -14,7 +14,7 @@ interface BaseAlertProps {
 
 export type AlertProps = Partial<BaseAlertProps & React.HTMLAttributes<HTMLElement>>;
 
-const Alert: React.FC<AlertProps> = (props) => {
+const Alert: React.FC<AlertProps> = (props) => {    
     const [Visible, setVisible] = useState(true)
     const { title, description, type, onClose, cloable, className, ...restProps } = props;
     const classes = ClassNames('alert', className, {
