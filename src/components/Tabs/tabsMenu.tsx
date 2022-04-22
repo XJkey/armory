@@ -5,6 +5,7 @@ import { TabsContext } from "./tabs"
 export interface tabsMenuProps {
     index: number;
     disabled?: boolean;
+    children: React.ReactNode
 }
 
 const TabsMenu: React.FC<tabsMenuProps> = (props) => {

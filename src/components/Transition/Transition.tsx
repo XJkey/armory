@@ -9,6 +9,7 @@ type TransitionProps = CSSTransitionProps & {
     animation?: AnimationName,
     //外套一个div，解决transition冲突问题
     wrapper?: boolean
+    children: React.ReactNode
 }
 
 let Transition: React.FC<TransitionProps> = (props) => {

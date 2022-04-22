@@ -10,6 +10,7 @@ export interface tabsProps {
     className?: string;
     style?: React.CSSProperties;
     onSelect?: SelectCallback;
+    children: React.ReactNode
 }
 
 

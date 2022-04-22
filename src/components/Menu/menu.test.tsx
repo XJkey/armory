@@ -7,12 +7,14 @@ import MenuItem from "./menuItem";
 const testProps: MenuProps = {
     defalutIndex: '0',
     onSelect: jest.fn(),
-    className: 'test'
+    className: 'test',
+    children: null
 }
 
 const testVerProps: MenuProps = {
     defalutIndex: '0',
-    mode: 'vertical'
+    mode: 'vertical',
+    children: null
 }
 
 const generateMenu = (props: MenuProps) => {

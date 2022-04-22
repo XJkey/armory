@@ -8,6 +8,7 @@ export interface tabsItemProps {
     style?: React.CSSProperties;
     title: string,
     disabled?: boolean;
+    children: React.ReactNode
 }
 
 const TabsItem: React.FC<tabsItemProps> = (props) => {
