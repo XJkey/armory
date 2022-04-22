@@ -1,0 +1,8 @@
+.viking-icon {
+    @each $name,
+    $glyph in $theme-colors {
+        &.icon-#{$name} {
+            color: $glyph;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { useState, createContext } from "react";
 import ClassNames from "classnames";
 import { MenuItemProps } from "./menuItem";
 
@@ -52,7 +52,7 @@ const Menu: React.FC<MenuProps> = (props) => {
             if (displayName === 'MenuItem' || displayName === 'SubMenu') {
                 return React.cloneElement(childElement, { index: index.toString() })
             } else {
-                console.log('waring:menu的子元素必须是MenuItem')
+                console.log('waring:menu的子元素必须是MenuItem或SubMenu')
             }
         })
     }
