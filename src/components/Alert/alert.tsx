@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ClassNames from 'classnames';
-import Transition from "../Transition/Transition";
-import Icon from "../Icon/Icon";
+import Transition from "../Transition/transition";
+import Icon from "../Icon/icon";
 export enum AlertStyleType {
     Default = 'default',
     Danger = 'danger',

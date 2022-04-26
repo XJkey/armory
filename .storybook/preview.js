@@ -29,7 +29,7 @@ export const globalTypes = {
 
 export const decorators = [
   (Story) => (
-    <div style={{ margin: '1px' }}>
+    <div  style={{ textAlign: "center" }}>
       <Story />
     </div>
   ),

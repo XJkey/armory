@@ -7,13 +7,13 @@ import MenuItem from './components/Menu/menuItem'
 import SubMenu from './components/Menu/subMenu'
 import Tabs from './components/Tabs/tabs'
 import TabsItem from './components/Tabs/tabsItem'
-import Icon from "./components/Icon/Icon"
-import Transition from './components/Transition/Transition';
+import Icon from "./components/Icon/icon"
+import Transition from './components/Transition/transition';
 function App() {
   let [show, setshow] = useState(false);
   return (
     <div className="App">
-      <Icon icon="arrow-down" thems="primary" />
+      <Icon icon="arrow-down" theme="primary" />
       <header className="App-header">
         <Button onClick={() => { setshow(!show) }} ss='123'>hello</Button>
         <Transition in={show} timeout={500} wrapper animation="zoom-in-left">

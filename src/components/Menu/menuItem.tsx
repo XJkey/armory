@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import ClassNames from "classnames";
 import { MenuContext } from './menu'
-
 export interface MenuItemProps {
     index?: string;
     disabled?: boolean;
@@ -23,11 +22,16 @@ const MenuItem: React.FC<MenuItemProps> = (props) => {
             context.onSelect(index);
         }
     }
-    return (
-        <li className={classes} style={style} onClick={handleClick}>
-            {children}
-        </li>
-    )
+
+    if (children) {
+        return (
+            <li className={classes} style={style} onClick={handleClick}>
+                {children}
+            </li>
+        )
+    } else {
+        return <></>
+    }
 }
 //判断类型
 MenuItem.displayName = 'MenuItem'
