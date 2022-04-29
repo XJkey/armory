@@ -23,12 +23,12 @@ interface BaseButtonProps {
 type NativeButtonProps = BaseButtonProps & React.ButtonHTMLAttributes<HTMLElement>;
 type AuchorButtonProps = BaseButtonProps & React.AnchorHTMLAttributes<HTMLElement>;
 export type ButtonProps = Partial<NativeButtonProps & AuchorButtonProps>;
-/**
- * ### 引用
- * ~~~js
- * import {Button} from armory/button
- * ~~~
- *  */
+// /**
+//  * ### 引用
+//  * ~~~js
+//  * import {Button} from armory/button
+//  * ~~~
+//  *  */
 const Button: React.FC<ButtonProps> = (props) => {
     const { disabled, size, btnType, children, className, href, ...restProps } = props;
     const classes = classNames('btn', className, {

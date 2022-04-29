@@ -13,7 +13,11 @@ Default.args = {
 Default.parameters = {
     docs: {
         description: {
-            story: `\`import {Button} from armory/button\``,
+             //markeDwon语法：如果要换行,在上一行结尾打两个空格
+            story: `
+\`import {Button} from armory/button\`  
+\`import {Button} from armory/button\`
+`,
         },
     },
 };
@@ -22,10 +26,12 @@ export const DefaultButton = Template.bind({});
 
 DefaultButton.parameters = {
     docs: {
+        //markeDwon语法：如果要copy的代码只有一行 上一个空行必须有三个Tab分隔符(制表符)
         description: {
-            story:`
+            story: `>引用button
+
             
-            import {Button} from armory/button`,
+    import {Button} from armory/button`,
         },
     },
 };
@@ -34,18 +40,16 @@ DefaultButton.args = {
     children: 'DefaultButton',
     //onClick: action("click")
 };
-DefaultButton.story = {
-    name: "默认按钮"
-}
+DefaultButton.storyName = "默认按钮"
 
-export const ButtonWithSize = () => (
+export const Size = () => (
     <>
         <Button size='lg'>large button</Button>
         <Button size='sm'>samll button</Button>
     </>
 )
 
-export const ButtonWithType = () => (
+export const Type = () => (
     <>
         <Button btnType="default">default button</Button>
         <Button btnType="primary">primary button</Button>
@@ -54,7 +58,7 @@ export const ButtonWithType = () => (
     </>
 )
 
-ButtonWithType.decorators = [(Story: any) => <div style={{ margin: '1px' }}>{Story()}</div>];
+Type.decorators = [(Story: any) => <div style={{ margin: '1px' }}>{Story()}</div>];
 
 export default {
     /* 👇 The title prop is optional.
@@ -68,15 +72,29 @@ export default {
     parameters: {
         docs: {
             description: {
-                component:
-`>引用button
+                // component: `>引用button
+
+                // import {Button} from armory/button`,
+
+                component:`>引用button
 
 <https://news.sina.com.cn/>
 
-    import {Button} from armory/button 
-<https://news.sina.com.cn/>
-`,
+    import {Button} from armory/button   
+    import {Button} from armory/button`
             },
         },
     },
 } as ComponentMeta<typeof Button>;
+
+
+// {
+//     component:
+// `>引用button
+
+//
+
+// import {Button} from armory/button
+// <https://news.sina.com.cn/>
+// `,
+// }

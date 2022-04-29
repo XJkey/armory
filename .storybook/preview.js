@@ -7,6 +7,15 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  options: {
+    storySort: {
+      //method: 'alphabetical',
+      // webpack5 bug 子菜单无法排序 
+      order: ['输入框', ['Default', 'Prepend', 'Append', '*']],
+      //includeName:true ,
+      locales: 'en-US',
+    },
+  },
 }
 
 export const globalTypes = {
@@ -29,8 +38,9 @@ export const globalTypes = {
 
 export const decorators = [
   (Story) => (
-    <div  style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center" }}>
       <Story />
     </div>
   ),
 ];
+
