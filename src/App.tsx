@@ -9,11 +9,21 @@ import Tabs from './components/Tabs/tabs'
 import TabsItem from './components/Tabs/tabsItem'
 import Icon from "./components/Icon/icon"
 import Transition from './components/Transition/transition';
+import AutoComplete from './components/AutoComplete/autoComplete';
+
+let fetchSuggestion = (value: string) => {
+  return ['bradley', 'pope', 'caruso', 'cook', 'cousins',
+    'james', 'AD', 'green', 'howard', 'kuzma', 'McGee', 'rando'].filter((item) => item.includes(value)).map((name) => ({ value: name }))
+}
+
+
+
 function App() {
   let [show, setshow] = useState(false);
   return (
     <div className="App">
       <Icon icon="arrow-down" theme="primary" />
+      <AutoComplete fetchSuggestions={fetchSuggestion} />
       <header className="App-header">
         <Button onClick={() => { setshow(!show) }} ss='123'>hello</Button>
         <Transition in={show} timeout={500} wrapper animation="zoom-in-left">

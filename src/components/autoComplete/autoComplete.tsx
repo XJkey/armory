@@ -1,94 +1,86 @@
-import React, { useState, ChangeEvent, ReactElement, useEffect, useRef } from 'react';
-import Input, { InputProps } from '../Input/input';
-import Icon from '../Icon/icon';
-import useDebounce from '../../hooks/useDebounce'
-import classNames from 'classnames';
-import useClickOutside from '../../hooks/useClickOutside';
+import { ReactElement, useState, useEffect, KeyboardEvent, useRef } from "react";
+import React, { ChangeEvent } from "react";
+import classNames from "classnames";
+import Input, { InputProps } from "../Input/input";
+import Icon from "../Icon/icon";
+import useDebounceHook from "../../hooks/useDebounce"
+import useClickOutside from "../../hooks/useClickOutside"
 interface DataSourceObject {
     value: string
+    [index: string | number | symbol]: any
 }
 
-//相当于{}&{value: string}
 export type DataSourceType<T = {}> = T & DataSourceObject
 
-
-export interface AutoCompleteProps extends Omit<InputProps, 'onSelect'> {
-    fetchSuggestions: (keyword: string) => DataSourceType[] | Promise<DataSourceType[]>,
-
-    onSelect?: (item: DataSourceType) => void,
-
+interface AutoCompleteProps extends Omit<InputProps, "onSelect"> {
+    fetchSuggestions: (item: string) => DataSourceType[] | Promise<DataSourceType[]>
+    onSelect?: (item: DataSourceType) => void
     renderOption?: (item: DataSourceType) => ReactElement
 }
 
 export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
-    const { fetchSuggestions, onSelect, value, renderOption, ...restProps } = props;
-    const [inputValue, SetInputValue] = useState(value as string)
-    const [suggestions, setSuggestions] = useState<DataSourceType[]>([])
-    const [loading, setLoading] = useState(false);
-    //useRef:跨越渲染周期存储数据，而且对它修改也不会引起组件渲染
-    const triggerSearch = useRef(false);
-    const componentRef = useRef<HTMLDivElement>(null);
-
-    const [hightlightIndex, setHightlightIndex] = useState(-1)
-    const debounceValue = useDebounce(inputValue, 500);
-    useClickOutside(componentRef, () => { setSuggestions([]) })
+    const { fetchSuggestions, onSelect, value, renderOption, ...restPsops } = props
+    const [inputValue, setInputValue] = useState(value as string || "")
+    const [suggestions, setSugestions] = useState<DataSourceType[]>([])
+    const [loading, setLoading] = useState(false)
+    const [highlightIndex, setHighlightIndex] = useState(-1)
+    const debounceValue = useDebounceHook(inputValue, 800)
+    const triggerSearch = useRef(false)
+    const componentRef = useRef<HTMLDivElement>(null)
+    useClickOutside(componentRef, () => setSugestions([]))
     useEffect(() => {
         if (debounceValue && triggerSearch.current) {
-            const results = fetchSuggestions(debounceValue)
+            let results = fetchSuggestions(debounceValue);
             if (results instanceof Promise) {
                 setLoading(true)
-                results.then(data => {
+                results.then((data) => {
                     setLoading(false)
-                    setSuggestions(data)
+                    setSugestions(data)
                 })
             } else {
-                setSuggestions(results)
+                setSugestions(results)
             }
-
         } else {
-            setSuggestions([])
+            setSugestions([])
         }
-        setHightlightIndex(-1)
-    }, [debounceValue, fetchSuggestions])
-
+        setHighlightIndex(-1)
+    }, [debounceValue])
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.trim()
-        SetInputValue(value)
-        triggerSearch.current = true
+        let value = e.target.value.trim();
+        triggerSearch.current = true;
+        setInputValue(value);
     }
-
     const handleSelect = (item: DataSourceType) => {
-        SetInputValue(item.value)
-        setSuggestions([])
+        if (!item) return;
+        setInputValue(item.value)
+        setSugestions([])
         if (onSelect) {
             onSelect(item)
         }
-        triggerSearch.current = false
+        triggerSearch.current = false;
     }
-
-    const hightligth = (index: number) => {
+    const highlight = (index: number) => {
+        console.log(index)
         if (index < 0) index = 0;
-        if (index >= suggestions.length) {
-            index = suggestions.length - 1;
-        }
-        setHightlightIndex(index)
+        if (index >= suggestions.length) index = suggestions.length - 1;
+        setHighlightIndex(index)
     }
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
 
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         switch (e.keyCode) {
             case 13:
-                if (suggestions[hightlightIndex]) {
-                    handleSelect(suggestions[hightlightIndex])
+                if (suggestions[highlightIndex]) {
+                    handleSelect(suggestions[highlightIndex])
                 }
-                break;
+                break
             case 38:
-                hightligth(hightlightIndex - 1)
-                break;
+                highlight(highlightIndex - 1)
+                break
             case 40:
-                hightligth(hightlightIndex + 1)
-                break;
+                highlight(highlightIndex + 1)
+                break
             case 27:
-                setSuggestions([])
+                setSugestions([])
                 break
             default:
                 break
@@ -96,29 +88,33 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     }
 
     const renderTemplate = (item: DataSourceType) => {
-        return renderOption ? renderOption(item) : item.value
+        if (renderOption) {
+            return renderOption(item)
+        } else {
+            return item.value
+        }
     }
     const generateDropdown = () => {
         return (
-            <ul>
+            <ul className="viking-suggestion-list">
                 {suggestions.map((item, index) => {
                     const cnames = classNames('suggestion-item', {
-                        'item-heigtlighted': index === hightlightIndex
+                        'is-active': index === highlightIndex
                     })
-                    return (
-                        <li key={index} className={cnames} onClick={() => handleSelect(item)}>
-                            {renderTemplate(item)}
-                        </li>
-                    )
+                    return <li className={cnames} key={index} onClick={() => handleSelect(item)}>{renderTemplate(item)}</li>
                 })}
             </ul>
         )
     }
+
     return (
         <div className="viking-auto-complete" ref={componentRef}>
-            <Input value={inputValue} {...restProps} onChange={handleChange} onKeyDown={handleKeyDown} />
-            {loading && <ul><Icon icon='spinner' spin /></ul>}
-            {(suggestions.length > 0) && generateDropdown()}
+            <Input {...restPsops} value={inputValue} onChange={(e) => handleChange(e)} onKeyDown={handleKeyDown} />
+            {loading && <ul><li><Icon icon="spinner" spin /></li></ul>}
+            {(suggestions.length > 0 && inputValue) && generateDropdown()}
         </div>
     )
+
 }
+
+export default AutoComplete;

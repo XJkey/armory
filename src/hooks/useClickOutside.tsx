@@ -1,19 +1,14 @@
-import { RefObject, useEffect } from 'react';
+import { RefObject, useEffect } from "react";
 
-function useClickOutside(ref: RefObject<HTMLElement>, handler: Function) {
+const useClickOutsideHook = (ref: RefObject<HTMLElement>, callBack: Function) => {
     useEffect(() => {
-        const listner = (event: MouseEvent) => {
-            //.contains() 判断一个元素内是否包含另一个元素
-            if (!ref.current || ref.current.contains(event.target as HTMLElement)) {
-                return
-            }
-            handler(event)
+        const listener = (e: MouseEvent) => {
+            if (!e.target || ref.current?.contains(e.target as Node)) return;
+            callBack(e)
         }
-        document.addEventListener('click', listner)
-        return () => {
-            document.removeEventListener('click', listner)
-        }
-    }, [ref, handler])
+        document.addEventListener('click', listener)
+        return () => document.removeEventListener("click", listener)
+    }, [ref, callBack])
 }
 
-export default useClickOutside
+export default useClickOutsideHook
