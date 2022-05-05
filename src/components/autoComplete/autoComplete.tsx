@@ -5,6 +5,7 @@ import Input, { InputProps } from "../Input/input";
 import Icon from "../Icon/icon";
 import useDebounceHook from "../../hooks/useDebounce"
 import useClickOutside from "../../hooks/useClickOutside"
+import Transition from "../Transition/transition"
 interface DataSourceObject {
     value: string
     [index: string | number | symbol]: any
@@ -96,22 +97,24 @@ export const AutoComplete: React.FC<AutoCompleteProps> = (props) => {
     }
     const generateDropdown = () => {
         return (
-            <ul className="viking-suggestion-list">
-                {suggestions.map((item, index) => {
-                    const cnames = classNames('suggestion-item', {
-                        'is-active': index === highlightIndex
-                    })
-                    return <li className={cnames} key={index} onClick={() => handleSelect(item)}>{renderTemplate(item)}</li>
-                })}
-            </ul>
+            <Transition in={(suggestions.length > 0 && !!inputValue) || loading} timeout={500} animation="zoom-in-top" onExited={() => { setSugestions([]); console.log("onExited") }}>
+                <ul className="viking-suggestion-list">
+                    {loading && <li><Icon icon="spinner" spin /></li>}
+                    {suggestions.map((item, index) => {
+                        const cnames = classNames('suggestion-item', {
+                            'is-active': index === highlightIndex
+                        })
+                        return <li className={cnames} key={index} onClick={() => handleSelect(item)}>{renderTemplate(item)}</li>
+                    })}
+                </ul>
+            </Transition>
         )
     }
 
     return (
         <div className="viking-auto-complete" ref={componentRef}>
             <Input {...restPsops} value={inputValue} onChange={(e) => handleChange(e)} onKeyDown={handleKeyDown} />
-            {loading && <ul><li><Icon icon="spinner" spin /></li></ul>}
-            {(suggestions.length > 0 && inputValue) && generateDropdown()}
+            {generateDropdown()}
         </div>
     )
 
