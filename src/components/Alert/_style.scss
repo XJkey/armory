@@ -40,9 +40,6 @@
     }
 }
 
-
-
-
 .alert-danger {
     @include alert-style($danger, $white)
 }

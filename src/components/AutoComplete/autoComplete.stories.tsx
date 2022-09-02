@@ -47,7 +47,7 @@ export const asyncComplte = Template.bind({});
 
 const handleFetch = (value: string) => {
     return fetch(`https://api.github.com/search/users?q=${value}`)
-        .then((result) => result.json())
+        .then((result) => { console.log(result); return result.json() })
         .then(({ items }) => {
             return items.slice(0, 10).map((item: any) => ({ value: item.login, ...item }))
         })

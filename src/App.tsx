@@ -10,6 +10,13 @@ import TabsItem from './components/Tabs/tabsItem'
 import Icon from "./components/Icon/icon"
 import Transition from './components/Transition/transition';
 import AutoComplete from './components/AutoComplete/autoComplete';
+import Upload from "./components/Upload/upload";
+
+import axios from "axios";
+
+axios.get('https://jsonplaceholder.typicode.com/todos/1').then((res) => {
+  console.log(res)
+})
 
 let fetchSuggestion = (value: string) => {
   return ['bradley', 'pope', 'caruso', 'cook', 'cousins',
@@ -22,7 +29,7 @@ function App() {
   let [show, setshow] = useState(false);
   return (
     <div className="App">
-      <Icon icon="arrow-down" theme="primary" />
+      {/* <Icon icon="arrow-down" theme="primary" />
       <AutoComplete fetchSuggestions={fetchSuggestion} />
       <header className="App-header">
         <Button onClick={() => { setshow(!show) }} ss='123'>hello</Button>
@@ -71,7 +78,8 @@ function App() {
           <TabsItem disabled index={1} title="d5f">4ggggg5</TabsItem>
           <TabsItem index={1} title="d5f">4ggggg5</TabsItem>
         </Tabs>
-      </header>
+      </header> */}
+      <Upload></Upload>
     </div>
   );
 }
