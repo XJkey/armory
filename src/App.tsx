@@ -27,6 +27,9 @@ let fetchSuggestion = (value: string) => {
 
 function App() {
   let [show, setshow] = useState(false);
+  const progress = (a: number, b: File) => {
+    console.log(a, b)
+  }
   return (
     <div className="App">
       {/* <Icon icon="arrow-down" theme="primary" />
@@ -79,7 +82,7 @@ function App() {
           <TabsItem index={1} title="d5f">4ggggg5</TabsItem>
         </Tabs>
       </header> */}
-      <Upload></Upload>
+      <Upload action='http://jsonplaceholder.typicode.com/posts' onProgress={progress}></Upload>
     </div>
   );
 }
