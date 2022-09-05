@@ -1,7 +1,9 @@
-import React, { FC, useState, useEffect, useRef, ChangeEvent } from "react";
+import React, { FC, useState, useEffect, useRef, ChangeEvent, Children } from "react";
 import axios from "axios";
 import Button from "../Button/button";
 import { UploadList } from "./upLoadList";
+import { Dragger } from "./dragger"
+import Icon from "../Icon/icon";
 
 
 export type UploadFileStatus = "ready" | 'uploading' | 'success' | 'error'
@@ -30,12 +32,14 @@ export interface UploadProps {
     data?: { [key: string]: any };
     withCredentials?: boolean;
     accept?: string;
-    multiple?: boolean
+    multiple?: boolean;
+    children?: React.ReactNode;
+    drag?: boolean;
 }
 
 export const Upload: FC<UploadProps> = (props: any) => {
     const { action, onProgress, onSuccess, onError, beforUpload, onChange, defaultFileList, onRemove,
-        headers, name, data, withCredentials, accept, multiple } = props;
+        headers, name, data, withCredentials, accept, multiple, children, drag } = props;
     const fileInput = useRef<HTMLInputElement>(null);
     const [filelist, setFilelist] = useState<UploadFile[]>(defaultFileList || []);
     const updateFileList = (updateFile: UploadFile, updateObj: Partial<UploadFile>) => {
@@ -143,7 +147,13 @@ export const Upload: FC<UploadProps> = (props: any) => {
     //http://jsonplaceholder.typicode.com/posts
     return (
         <div className="viking-upload-component">
-            <Button btnType="primary" size="sm" onClick={handleClick}>Upload File</Button>
+            <span onClick={handleClick}>
+                {drag ?
+                    <Dragger onFile={uploadFile} style={{ fontSize: "40px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                        <Icon icon={"upload"} />
+                    </Dragger> :
+                    (children ? children : <Button btnType="primary" size="sm">Upload File</Button>)}
+            </span>
             <input type="file" className="viking-file-input" style={{ "display": "none" }}
                 ref={fileInput} onChange={handleFileChange} accept={accept} multiple={multiple} />
             <UploadList filelist={filelist} onRemove={handleRemove} />

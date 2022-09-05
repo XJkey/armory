@@ -1,0 +1,30 @@
+.viking-progress {
+    width        : 200px;
+    height       : 15px;
+    border       : 1px solid #c3ced9;
+    border-radius: 5px;
+
+    .bar {
+        width        : 0%;
+        height       : 100%;
+        position     : relative;
+        border-radius: 5px;
+        box-sizing   : border-box;
+        transition   : all 0.2s;
+
+        .text {
+            position : absolute;
+            right    : 5px;
+            top      : 0;
+            font-size: 1rem *0.75;
+            color    : #fff;
+        }
+    }
+}
+
+@each $key,
+$val in $theme-colors {
+    .viking-progress-#{$key} {
+        @include progress-style($val)
+    }
+}

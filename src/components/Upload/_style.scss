@@ -1,51 +1,56 @@
 .viking-upload-list {
-  margin: 0;
-  padding: 0;
+  margin         : 0;
+  padding        : 0;
   list-style-type: none;
 }
 
+.viking-upload-component {
+  display: inline-block;
+}
+
 .viking-uploader-dragger {
-  background: $gray-100;
-  border: 1px dashed $gray-300;
+  background   : $gray-100;
+  border       : 1px dashed $gray-300;
   border-radius: 4px;
-  cursor: pointer;
-  padding: 20px;
-  width: 360px;
-  height: 180px;
-  text-align: center;
+  cursor       : pointer;
+  padding      : 20px;
+  width        : 360px;
+  height       : 180px;
+  text-align   : center;
 
   &:hover {
     border: 1px dashed $primary;
   }
 
   &.is-dragover {
-    border: 2px dashed $primary;
+    border    : 2px dashed $primary;
     background: rgba($primary, .2);
   }
 }
 
 
 .viking-upload-list-item {
-  transition: all .5s cubic-bezier(.55, 0, .1, 1);
-  font-size: 14px;
-  line-height: 1.8;
-  margin-top: 5px;
-  box-sizing: border-box;
+  transition   : all .5s cubic-bezier(.55, 0, .1, 1);
+  font-size    : 14px;
+  line-height  : 1.8;
+  margin-top   : 5px;
+  box-sizing   : border-box;
   border-radius: 4px;
-  min-width: 200px;
-  position: relative;
-  cursor: default;
+  min-width    : 200px;
+  position     : relative;
+  cursor       : default;
+
   &:first-child {
     margin-top: 10px;
   }
 
   .file-name {
-    margin-left: 5px;
+    margin-left : 5px;
     margin-right: 40px;
 
     svg {
       margin-right: 5px;
-      color: $gray-500;
+      color       : $gray-500;
     }
   }
 
@@ -66,20 +71,24 @@
   }
 
   .file-status {
-    display: block;
-    position: absolute;
-    right: 5px;
-    top: 0;
+    display    : block;
+    position   : absolute;
+    right      : 5px;
+    top        : 0;
     line-height: inherit;
   }
 
   .file-actions {
-    display: none;
-    position: absolute;
-    right: 7px;
-    top: 0;
+    display    : none;
+    position   : absolute;
+    right      : 7px;
+    top        : 0;
     line-height: inherit;
-    cursor: pointer;
+    cursor     : pointer;
+  }
+
+  .file-progress {
+    padding-left: 5px;
   }
 
   &:hover {

@@ -2,7 +2,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Upload, UploadFile } from './upload';
-
+import { Button } from '../Button/button';
 const defaultFileList: UploadFile[] = [
     { uid: '121', size: 1234, name: 'hello.md', status: 'uploading', percent: 10 },
     { uid: '122', size: 233, name: 'xyz.md', status: 'success', percent: 50 },
@@ -36,8 +36,11 @@ export const Default = () => (
             data={{ 'key': 'value' }}
             headers={{ "token": "123456" }}
             multiple={true}
+            drag={true}
         // beforUpload={chaeckFileSize}
-        ></Upload>
+        >
+            <Button btnType="danger" size="sm">Upload File</Button>
+        </Upload>
     </div >
 
 )

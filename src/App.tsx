@@ -82,7 +82,9 @@ function App() {
           <TabsItem index={1} title="d5f">4ggggg5</TabsItem>
         </Tabs>
       </header> */}
-      <Upload action='http://jsonplaceholder.typicode.com/posts' onProgress={progress}></Upload>
+      <Upload action='http://jsonplaceholder.typicode.com/posts' onProgress={progress}>
+        <Button btnType="primary" size="sm">Upload File</Button>
+      </Upload>
     </div>
   );
 }

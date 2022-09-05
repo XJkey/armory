@@ -80,3 +80,7 @@
   background: $background;
   color     : $color;
 }
+
+@mixin progress-style($background) {
+  background: $background;
+}
